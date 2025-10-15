@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message For The Moms</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffe6f0, #ffb3c6);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .download-btn {
+            padding: 20px 50px;
+            font-size: 22px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .download-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+        }
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            animation: floatUp 1.5s linear forwards;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-150px) scale(1.5); }
+        }
+        h1 {
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            color: #ff1493;
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Message For The Moms 💖</h1>
+    <button class="download-btn" onclick="downloadMessage()">💖 Download Message For The Moms</button>
+
+    <script>
+        function downloadMessage() {
+            const text = `I want to tell you today, with all my heart, how much I love you. Every day that I have you by my side is a blessing. You are my light, my support, and the person who makes me feel safe even in the most difficult moments.
+
+I remember all the nights you stayed awake for me, all the worries you carried so that I could be happy, and all your smiles that made my heart leap with joy. Everything I am today, everything I have achieved, and everything I dream of becoming is thanks to you and your unconditional love.
+
+Every small gesture you have done for me – a kind word, a hug, a gentle touch – has had a huge impact on me. In my eyes, you are a true angel, and your love is stronger than any obstacle in the world.
+
+I love you more than I can express in words. Thank you for your patience, your advice, your sacrifices, and for every moment you encouraged me to be the best version of myself. Thank you for teaching me what kindness, courage, and true love mean.
+
+I promise that I will always try to make you proud, bring you smiles, and show you that all your love has never been in vain. You are the heart of our family, the soul that unites us, and the reason every day has meaning.
+
+I love you infinitely, and you will always be the most important person in my life. I will never stop thanking you and showing you how much you mean to me.
+
+With endless love,`;
+
+            const blob = new Blob([text], { type: "text/plain" });
+            const link = document.createElement("a");
+            const isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
+
+            if (isIOS) {
+                // iOS workaround: open text in new tab
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newWindow = window.open("");
+                    newWindow.document.write('<pre>' + e.target.result + '</pre>');
+                };
+                reader.readAsText(blob);
+            } else {
+                // standard download for desktop and Android
+                link.href = URL.createObjectURL(blob);
+                link.download = "MessageForTheMoms.txt";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // Floating hearts animation
+            for (let i = 0; i < 5; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.fontSize = 15 + Math.random() * 25 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1500);
+        }
+    </script>
+</body>
+</html>
